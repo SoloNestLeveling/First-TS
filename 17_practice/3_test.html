@@ -1,0 +1,24 @@
+<script>
+    function findPairsWithSum(arr, target) {
+        const pairs = []; // 합이 target이 되는 조합을 저장할 배열
+        const seen = new Map(); // 이전에 나온 숫자를 저장하는 Map
+
+        for (const num of arr) {
+            const complement = target - num; // 현재 숫자와 합이 target이 되는 보완 숫자 계산
+            if (seen.has(complement)) {
+                // seen Map에 보완 숫자(complement)가 있으면 이미 나온 숫자 중 보완되는 조합이 있다는 뜻
+                pairs.push([num, complement]); // 현재 숫자와 보완 숫자를 배열에 추가하여 조합 생성
+            }
+            seen.set(num, true); // 현재 숫자를 seen Map에 추가하여 중복 방지
+        }
+
+        return pairs; // 찾은 모든 조합 배열을 반환
+    }
+
+    const nums = [2, 4, 3, 1, 7, 5, 9];
+    const targetSum = 10;
+    const result = findPairsWithSum(nums, targetSum);
+
+    console.log(result); // 예시 출력: [ [4, 6], [3, 7], [1, 9] ]
+
+</script>
